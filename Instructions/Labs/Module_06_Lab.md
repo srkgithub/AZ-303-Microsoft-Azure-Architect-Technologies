@@ -59,7 +59,9 @@ Estimated Time: 90 minutes
 
 The main tasks for this exercise are as follows:
 
- 1. Deploy an Azure VM by using an Azure Resource Manager template
+1. Deploy an Azure VM by using an Azure Resource Manager template
+
+1. Deploy Azure Bastion
 
 
 #### Task 1: Deploy an Azure VM by using an Azure Resource Manager template
@@ -111,6 +113,48 @@ The main tasks for this exercise are as follows:
 
 1. In the Azure portal, close the **Cloud Shell** pane. 
 
+#### Task 2: Deploy Azure Bastion 
+
+> **Note**: Azure Bastion allows for connection to the Azure VMs without public endpoints which you deployed in the previous task of this exercise, while providing protection against brute force exploits that target operating system level credentials.
+
+1. In the browser window displaying the Azure portal, open another tab and, in the browser tab, navigate to the Azure portal.
+
+1. In the Azure portal, open **Cloud Shell** pane by selecting on the toolbar icon directly to the right of the search textbox.
+
+1. From the PowerShell session in the Cloud Shell pane, run the following to add a subnet named **AzureBastionSubnet** to the virtual network named **az30306a-vnet** you created earlier in this exercise:
+
+   ```powershell
+   $resourceGroupName = 'az30306a-labRG'
+   $vnet = Get-AzVirtualNetwork -ResourceGroupName $resourceGroupName -Name 'az30306a-vnet'
+   $subnetConfig = Add-AzVirtualNetworkSubnetConfig `
+     -Name 'AzureBastionSubnet' `
+     -AddressPrefix 10.2.3.0/24 `
+     -VirtualNetwork $vnet
+   $vnet | Set-AzVirtualNetwork
+   ```
+
+1. Close the Cloud Shell pane.
+
+1. In the Azure portal, search for and select **Bastions** and, from the **Bastions** blade, select **+ Create**.
+
+1. On the **Basic** tab of the **Create a Bastion** blade, specify the following settings and select **Review + create**:
+
+   |Setting|Value|
+   |---|---|
+   |Subscription|the name of the Azure subscription you are using in this lab|
+   |Resource group|**az30306a-labRG**|
+   |Name|**az30306a-bastion**|
+   |Region|the same Azure region to which you deployed the resources in the previous tasks of this exercise|
+   |Tier|**Basic**|
+   |Virtual network|**az30306a-vnet**|
+   |Subnet|**AzureBastionSubnet (10.2.3.0/24)**|
+   |Public IP address|**Create new**|
+   |Public IP name|**az30306a-vnet-ip**|
+
+1. On the **Review + create** tab of the **Create a Bastion** blade, select **Create**:
+
+   > **Note**: Wait for the deployment to complete before you proceed to the next task. The deployment might take about 5 minutes.
+
 
 ### Exercise 1: Configure Azure Storage account authorization by using shared access signature.
   
@@ -161,14 +205,14 @@ The main tasks for this exercise are as follows:
 
 1. In the Azure portal, search for and select **Virtual machines**, and, on the **Virtual machines** blade, in the list of virtual machines, select **az30306a-vm0**.
 
-1. On the **az30306a-vm0** blade, select **Connect**, in the drop-down menu, select **RDP**, and then select **Download RDP File**, then select **open file** and select **Connect**.
+1. On the **az30306a-vm0** blade, select **Connect**, in the drop-down menu, select **Bastion**, on the **Bastion** tab of the **az30306a-vm0 \| Connect** blade, select **Use Bastion**.
 
-1. When prompted, sign in with the following credentials:
+1. When prompted, provde the following credentials and select **Connect**:
 
-    | Setting | Value | 
-    | --- | --- |
-    | User Name | **Student** |
-    | Password | **Pa55w.rd1234** |
+   |Setting|Value|
+   |---|---|
+   |User Name|**Student**|
+   |Password|**Pa55w.rd1234**|
 
 1. Within the Remote Desktop session to **az30306a-vm0**, in the Server Manager window, select **Local Server**, select the **On** link next to the **IE Enhanced Security Configuration** label, and, in the **IE Enhanced Security Configuration** dialog box, select both **Off** options.
 

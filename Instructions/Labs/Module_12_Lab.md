@@ -113,7 +113,7 @@ The main tasks for this exercise are as follows:
 
 1. In the Azure portal, open **Cloud Shell** pane by selecting on the toolbar icon directly to the right of the search textbox.
 
-1. From the PowerShell session in the Cloud Shell pane, run the following to add a subnet named **AzureBastionSubnet** to the virtual network named **az30308a-hv-vnet** you created earlier in this exercise:
+1. From the PowerShell session in the Cloud Shell pane, run the following to add a subnet named **AzureBastionSubnet** to the virtual network named **az30312a-hv-vnet** you created earlier in this exercise:
 
    ```powershell
    $resourceGroupName = 'az30312a-labRG'
