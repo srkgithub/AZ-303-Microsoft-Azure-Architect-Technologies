@@ -134,6 +134,34 @@ The main tasks for this exercise are as follows:
       
 1. From the Cloud Shell pane, upload the Azure Resource Manager template **\\\\AZ303\\AllFiles\\Labs\\05\\azuredeploy30305rga.json**.
 
+1. From the Cloud Shell pane, run the following command to identify the IPv4 address associated with the Azure VM hosting the Bash session:
+
+   ```Bash
+   curl -s checkip.dyndns.org | sed -e 's/.*Current IP Address: //' -e 's/<.*$//'
+   ```
+
+1. Record the public IP address returned by the command. You will need it in this lab.
+
+1. In the Cloud Shell pane and, in the Bash session within the Cloud Shell pane, open the **azuredeploy30305rga.json** file in your preferred text editor.
+
+1. In the editor window displaying the content of the **azuredeploy30305rga.json** file, in the following section, replace the asterisk in the line `"sourceAddressPrefix": "*",` with the public IP address you recorded, save the change, and close the file:
+
+   ```json
+          {
+            "name": "custom-allow-rdp",
+            "properties": {
+              "priority": 1000,
+              "sourceAddressPrefix": "*",
+              "protocol": "Tcp",
+              "destinationPortRange": "3389",
+              "access": "Allow",
+              "direction": "Inbound",
+              "sourcePortRange": "*",
+              "destinationAddressPrefix": "*"
+            }
+          },
+   ```
+
 1. From the Cloud Shell pane, upload the Azure Resource Manager parameter file **\\\\AZ303\\AllFiles\\Labs\\05\\azuredeploy30305rga.parameters.json**.
 
 1. From the Cloud Shell pane, run the following to deploy an Azure Load Balancer Basic with its backend pool consisting of a pair of Azure VMs hosting Windows Server 2019 Datacenter Core into the same availability set (replace the `<vm_Size>` placeholder with the size of the Azure VM you intend to use for this deployment, such as `Standard_D2s_v3`):
@@ -304,6 +332,26 @@ The main tasks for this exercise are as follows:
    ```
 
 1. From the Cloud Shell pane, upload the Azure Resource Manager template **\\\\AZ303\\AllFiles\\Labs\\05\\azuredeploy30305rgb.json**.
+
+1. In the Cloud Shell pane and, in the Bash session within the Cloud Shell pane, open the **azuredeploy30305rgb.json** file in your preferred text editor.
+
+1. In the editor window displaying the content of the **azuredeploy30305rgb.json** file, in the following section, replace the asterisk in the line `"sourceAddressPrefix": "*",` with the public IP address you recorded earlier in this lab, save the change, and close the file:
+
+   ```json
+          {
+            "name": "custom-allow-rdp",
+            "properties": {
+              "priority": 1000,
+              "sourceAddressPrefix": "*",
+              "protocol": "Tcp",
+              "destinationPortRange": "3389",
+              "access": "Allow",
+              "direction": "Inbound",
+              "sourcePortRange": "*",
+              "destinationAddressPrefix": "*"
+            }
+          },
+   ```
 
 1. From the Cloud Shell pane, upload the Azure Resource Manager parameter file **\\\\AZ303\\AllFiles\\Labs\\05\\azuredeploy30305rgb.parameters.json**.
 
@@ -511,6 +559,26 @@ The main tasks for this exercise are as follows:
    ```
 
 1. From the Cloud Shell pane, upload the Azure Resource Manager template **\\\\AZ303\\AllFiles\\Labs\\05\\azuredeploy30305rgc.json**.
+
+1. In the Cloud Shell pane and, in the Bash session within the Cloud Shell pane, open the **azuredeploy30305rgc.json** file in your preferred text editor.
+
+1. In the editor window displaying the content of the **azuredeploy30305rgc.json** file, in the following section, replace the asterisk in the line `"sourceAddressPrefix": "*",` with the public IP address you recorded earlier in this lab, save the change, and close the file:
+
+   ```json
+          {
+            "name": "custom-allow-rdp",
+            "properties": {
+              "priority": 1000,
+              "sourceAddressPrefix": "*",
+              "protocol": "Tcp",
+              "destinationPortRange": "3389",
+              "access": "Allow",
+              "direction": "Inbound",
+              "sourcePortRange": "*",
+              "destinationAddressPrefix": "*"
+            }
+          },
+   ```
 
 1. From the Cloud Shell pane, upload the Azure Resource Manager parameter file **\\\\AZ303\\AllFiles\\Labs\\05\\azuredeploy30305rgc.parameters.json**.
 
