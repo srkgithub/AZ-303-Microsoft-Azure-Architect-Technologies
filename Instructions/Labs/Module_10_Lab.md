@@ -298,4 +298,4 @@ The main tasks for this exercise are as follows:
 
 1. In the Azure portal, navigate to the blade displaying properties of your Azure subscriptions, select the **Access control (IAM)** entry, and then select **Roles**.
 
-1. In the list of roles, select the **Virtual Machine Operator (Custom)** entry, select **Remove** and, when prompted to confirm, select **Yes**.
+1. In the list of roles, select the **Virtual Machine Operator (Custom)** entry, select **...** and select the **Delete** option.
